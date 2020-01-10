@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PessoaService} from '../core/services/pessoa.service';
 import {Pessoa} from '../core/models/pessoa.model';
 import {formatDateToBr, formatDateToUsa, replaceCpfCnpj} from '../core/utils/utils';
+import {ToastService} from "../core/services/toast.service";
 
 @Component({
   selector: 'app-pessoas',
@@ -17,7 +18,7 @@ export class PessoasComponent implements OnInit {
   pessoas: Pessoa[];
   cols: any[];
 
-  constructor(private pessoaService: PessoaService) {
+  constructor(private toastService: ToastService, private pessoaService: PessoaService) {
   }
 
   ngOnInit() {
@@ -47,6 +48,7 @@ export class PessoasComponent implements OnInit {
   save() {
     const pessoas = [...this.pessoas];
     this.pessoa.dataNascimento = formatDateToUsa(this.pessoa.dataNascimentoStr);
+    console.log(this.pessoa.dataNascimento);
     if (this.novaPessoa) {
       this.pessoa.cpf = replaceCpfCnpj(this.pessoa.cpf);
       this.pessoaService.adicionar(this.pessoa).subscribe(result => {
@@ -57,6 +59,8 @@ export class PessoasComponent implements OnInit {
       this.pessoaService.Atualizar(this.pessoa).subscribe(result => {
         pessoas[this.pessoas.indexOf(this.pessoaSelecionada)] = this.pessoa;
         this.afterSave(pessoas);
+      }, error => {
+        this.toastService.addSingle('error', '', error[0].erro);
       });
     }
   }

@@ -1,5 +1,6 @@
 import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
+import {Pipe, PipeTransform} from "@angular/core";
 
 
 export function replaceCpfCnpj(cpfCnpj: String): string {
@@ -13,9 +14,9 @@ export function formatDateToBr(date: Date) {
 }
 
 export function formatDateToUsa(date: string): Date {
-  const dia = date.substring(0, 2);
-  const mes = date.substring(2, 4);
-  const ano = date.substring(4, 8);
-  return new Date(ano + '-' + mes + '-' + dia);
-}
+  const dia = Number(date.substring(0, 2));
+  const mes = Number(date.substring(2, 4));
+  const ano = Number(date.substring(4, 8));
 
+  return new Date(ano, mes -1, dia);
+}

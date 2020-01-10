@@ -29,10 +29,10 @@ export class PessoaService {
   }
 
   Atualizar(pessoa: Pessoa): Observable<Pessoa> {
-    return this.http.put<Pessoa>(this.url, pessoa, httpOptions)
-      .pipe(
-        catchError(this.handleError('atualizar pessoa', pessoa))
-      );
+    return this.http.put<Pessoa>(this.url+"/"+pessoa.id, pessoa, httpOptions);
+      // .pipe(
+      //   catchError(this.handleError('atualizar pessoa', pessoa))
+      // );
   }
 
   deletar(id: any, pessoa: Pessoa): Observable<Pessoa> {

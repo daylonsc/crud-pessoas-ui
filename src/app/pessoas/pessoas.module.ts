@@ -6,6 +6,8 @@ import {HeaderBreadCrumbModule} from '../layout/header-breadcrumb/header-breadcr
 import {PessoasComponent} from './pessoas.component';
 import {DialogModule} from 'primeng/dialog';
 import {NgxMaskModule} from 'ngx-mask';
+import {DateTimeFormatPipe} from "../core/utils/DateTimeFormatPipe";
+import {InputMaskModule} from "primeng/inputmask";
 
 
 @NgModule({
@@ -15,9 +17,11 @@ import {NgxMaskModule} from 'ngx-mask';
     AppCommonModule,
     HeaderBreadCrumbModule,
     DialogModule,
-    NgxMaskModule
+    NgxMaskModule,
+    InputMaskModule,
   ],
   declarations: [
+    DateTimeFormatPipe,
     PessoasComponent
   ]
 })
